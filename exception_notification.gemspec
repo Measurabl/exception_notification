@@ -7,7 +7,8 @@ Gem::Specification.new do |s|
   s.email = "smartinez87@gmail.com"
   s.license = "MIT"
 
-  s.required_ruby_version     = '>= 2.0'
+  s.required_ruby_version     = '>= 1.9.3'
+  #s.required_ruby_version     = '>= 2.0'
   s.required_rubygems_version = '>= 1.8.11'
 
   s.files = `git ls-files`.split("\n")
