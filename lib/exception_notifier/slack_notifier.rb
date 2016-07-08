@@ -14,7 +14,7 @@ module ExceptionNotifier
         @ignore_data_if = options[:ignore_data_if]
 
         webhook_url = options.fetch(:webhook_url)
-        @backtrace_max_lines = options.fetch(:backtrace_max_lines) || 15
+        @backtrace_max_lines = options.fetch(:backtrace_max_lines, -1)
 
         @message_opts = options.fetch(:additional_parameters, {})
         @notifier = Slack::Notifier.new webhook_url, options
@@ -35,7 +35,7 @@ module ExceptionNotifier
       fields.push({ title: 'Hostname', value: Socket.gethostname })
 
       if exception.backtrace
-        formatted_backtrace = "```#{exception.backtrace.first(@backtrace_max_lines).join("\n")}```"
+        formatted_backtrace = "```#{exception.backtrace.slice(0..@backtrace_max_lines).join("\n")}```"
         fields.push({ title: 'Backtrace', value: formatted_backtrace })
       end
 
